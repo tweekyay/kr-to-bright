@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bright Brew Kalkylator</title>
+  <title>Systembolaget Kalkylator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,300..500&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
@@ -20,6 +20,7 @@
       --gold:       #9A6200;
       --gold-bright:#C4820E;
       --amber:      #B85000;
+      --rust:       #7A2800;
     }
 
     html, body { height: 100%; }
@@ -28,9 +29,9 @@
       background: var(--page-bg);
       min-height: 100vh;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
-      padding: 48px 16px;
+      padding: 40px 16px 60px;
       position: relative;
       overflow-x: hidden;
       font-family: 'Fraunces', serif;
@@ -40,26 +41,25 @@
       content: '';
       position: fixed;
       inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 50% 50%,
-        rgba(180, 90, 0, 0.18) 0%, transparent 70%);
+      background: radial-gradient(ellipse 70% 60% at 50% 40%,
+        rgba(180, 90, 0, 0.16) 0%, transparent 70%);
       pointer-events: none;
     }
 
     /* ── Rising bubbles ── */
     #bubbles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-
     .bubble {
       position: absolute;
       border-radius: 50%;
       background: radial-gradient(circle at 30% 30%,
-        rgba(220, 140, 20, 0.55), rgba(160, 70, 0, 0.08));
-      border: 1px solid rgba(210, 140, 20, 0.28);
+        rgba(220, 140, 20, 0.5), rgba(160, 70, 0, 0.07));
+      border: 1px solid rgba(210, 140, 20, 0.25);
       animation: rise linear infinite;
     }
     @keyframes rise {
       0%   { transform: translateY(0) translateX(0);    opacity: 0; }
-      6%   { opacity: 0.9; }
-      94%  { opacity: 0.2; }
+      6%   { opacity: 0.85; }
+      94%  { opacity: 0.18; }
       100% { transform: translateY(-108vh) translateX(12px); opacity: 0; }
     }
 
@@ -67,9 +67,9 @@
     .card {
       position: relative;
       z-index: 1;
-      width: min(500px, 100%);
+      width: min(560px, 100%);
       background: var(--card-bg);
-      padding: 44px 40px 36px;
+      padding: 40px 36px 32px;
       border-radius: 6px;
       box-shadow:
         0 0 0 2px var(--gold),
@@ -78,7 +78,7 @@
         0 0 0 14px var(--card-dark),
         0 0 0 16px var(--gold),
         0 24px 80px rgba(0,0,0,0.65),
-        0 0 60px rgba(180, 100, 0, 0.22);
+        0 0 60px rgba(180, 100, 0, 0.2);
       animation: cardIn 0.55s cubic-bezier(0.34, 1.45, 0.64, 1) both;
     }
     @keyframes cardIn {
@@ -88,45 +88,38 @@
     .card::after {
       content: '';
       position: absolute;
-      inset: 28px;
-      border: 1px solid rgba(154, 98, 0, 0.22);
+      inset: 26px;
+      border: 1px solid rgba(154, 98, 0, 0.2);
       border-radius: 3px;
       pointer-events: none;
     }
 
     /* ── Header ── */
-    .header { text-align: center; }
-
+    .header { text-align: center; margin-bottom: 4px; }
     .pre-title {
-      font-size: 0.68rem;
+      font-size: 0.67rem;
       font-weight: 600;
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--gold);
-      opacity: 0.75;
+      opacity: 0.7;
       margin-bottom: 8px;
     }
-
     h1 {
       font-weight: 900;
-      font-size: clamp(2.2rem, 7vw, 3.2rem);
+      font-size: clamp(1.9rem, 6vw, 2.8rem);
       color: var(--ink);
       line-height: 1.05;
       letter-spacing: -0.015em;
     }
-    h1 em {
-      font-style: italic;
-      font-weight: 400;
-      color: var(--gold-bright);
-    }
-
+    h1 em { font-style: italic; font-weight: 400; color: var(--gold-bright); }
     .tagline {
       font-style: italic;
       font-weight: 300;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: var(--gold);
-      margin-top: 6px;
-      opacity: 0.85;
+      margin-top: 5px;
+      opacity: 0.82;
     }
 
     /* ── Divider ── */
@@ -134,57 +127,45 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      margin: 22px 0 20px;
+      margin: 20px 0 18px;
       color: var(--gold);
     }
-    .divider-line {
-      flex: 1;
-      height: 1px;
-      background: currentColor;
-      opacity: 0.3;
-    }
-    .divider-pip {
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      opacity: 0.55;
-    }
+    .divider-line { flex: 1; height: 1px; background: currentColor; opacity: 0.28; }
+    .divider-pip { font-size: 0.62rem; letter-spacing: 0.15em; opacity: 0.5; }
 
     /* ── Input ── */
     .field-label {
       display: block;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 9px;
+      margin-bottom: 8px;
     }
-
     .input-shell {
       display: flex;
       border: 2px solid var(--gold);
       border-radius: 3px;
       overflow: hidden;
-      transition: box-shadow 0.25s;
+      transition: box-shadow 0.2s;
       background: #fff;
     }
     .input-shell:focus-within {
-      box-shadow: 0 0 0 3px rgba(154, 98, 0, 0.18);
+      box-shadow: 0 0 0 3px rgba(154, 98, 0, 0.16);
     }
-
     .kr-badge {
       font-family: 'Courier Prime', monospace;
       font-weight: 700;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       color: var(--gold);
       background: var(--card-dark);
-      padding: 11px 15px;
+      padding: 10px 14px;
       border-right: 2px solid var(--gold);
       display: flex;
       align-items: center;
       user-select: none;
     }
-
     input[type="number"] {
       flex: 1;
       min-width: 0;
@@ -192,9 +173,9 @@
       outline: none;
       font-family: 'Courier Prime', monospace;
       font-weight: 700;
-      font-size: 2rem;
+      font-size: 1.9rem;
       color: var(--ink);
-      padding: 8px 14px;
+      padding: 7px 13px;
       background: transparent;
     }
     input[type="number"]::-webkit-inner-spin-button,
@@ -202,124 +183,136 @@
     input[type="number"] { -moz-appearance: textfield; }
     input::placeholder { color: rgba(26,8,0,0.2); }
 
-    /* ── Results ── */
+    /* ── Results list ── */
     .results {
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+      transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
     }
-    .results.open { max-height: 700px; opacity: 1; }
+    .results.open { max-height: 1000px; opacity: 1; }
 
-    .result-hero {
-      text-align: center;
-      padding: 26px 0 12px;
-    }
-
-    .big-number {
-      font-weight: 900;
-      font-size: clamp(5.5rem, 22vw, 8.5rem);
-      color: var(--amber);
-      line-height: 0.88;
-      letter-spacing: -0.03em;
-      text-shadow:
-        2px 2px 0 rgba(139,48,0,0.35),
-        0 0 40px rgba(185,80,0,0.15);
-    }
-
-    .unit-label {
-      font-style: italic;
-      font-weight: 300;
-      font-size: 1.05rem;
-      color: var(--gold);
-      margin-top: 6px;
-      letter-spacing: 0.04em;
-    }
-
-    /* ── Mug grid ── */
-    .mugs {
+    .results-header {
       display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      justify-content: center;
-      padding: 4px 0 18px;
+      justify-content: space-between;
+      align-items: baseline;
+      margin: 22px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(154,98,0,0.22);
     }
-
-    .mug {
-      animation: mugPop 0.28s cubic-bezier(0.34,1.56,0.64,1) backwards;
-    }
-    @keyframes mugPop {
-      from { opacity: 0; transform: scale(0.4) rotate(-8deg); }
-      to   { opacity: 1; transform: scale(1)   rotate(0deg);  }
-    }
-
-    .more-label {
-      display: flex;
-      align-items: center;
-      font-style: italic;
-      font-weight: 300;
-      font-size: 0.88rem;
-      color: var(--gold);
-      opacity: 0.7;
-      padding: 2px 4px;
-    }
-
-    /* ── Info boxes ── */
-    .info-row { display: flex; gap: 10px; }
-
-    .info-box {
-      flex: 1;
-      background: var(--card-mid);
-      border: 1px solid rgba(154,98,0,0.25);
-      border-radius: 3px;
-      padding: 11px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .info-box-label {
-      font-size: 0.66rem;
+    .results-header-label {
+      font-size: 0.65rem;
       font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold);
-      opacity: 0.75;
+      opacity: 0.65;
     }
 
-    .info-box-value {
-      font-family: 'Courier Prime', monospace;
-      font-weight: 700;
-      font-size: 1.15rem;
-      color: var(--ink);
+    /* ── Beverage rows ── */
+    .bev-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
-    /* ── Footer ── */
-    .footer-note {
+    .bev-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card-mid);
+      border: 1px solid rgba(154,98,0,0.18);
+      border-radius: 3px;
+      padding: 10px 14px;
+      transition: background 0.15s, border-color 0.15s;
+      animation: rowIn 0.35s cubic-bezier(0.34, 1.3, 0.64, 1) both;
+    }
+    .bev-row.rank-1 {
+      background: var(--card-dark);
+      border-color: rgba(154,98,0,0.38);
+    }
+    @keyframes rowIn {
+      from { opacity: 0; transform: translateX(-8px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .bev-emoji {
+      font-size: 1.55rem;
+      line-height: 1;
+      flex-shrink: 0;
+      width: 32px;
       text-align: center;
-      margin-top: 22px;
+    }
+
+    .bev-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .bev-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .bev-meta {
       font-style: italic;
       font-weight: 300;
       font-size: 0.75rem;
       color: var(--gold);
-      opacity: 0.5;
-      letter-spacing: 0.03em;
+      opacity: 0.8;
+    }
+
+    .bev-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .bev-count {
+      font-family: 'Courier Prime', monospace;
+      font-weight: 700;
+      font-size: 1.7rem;
+      color: var(--amber);
+      line-height: 1;
+    }
+    .bev-row.rank-1 .bev-count {
+      font-size: 2rem;
+      color: var(--rust);
+    }
+    .bev-change {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.72rem;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+
+    .rank-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rust);
+      opacity: 0;
+      margin-left: auto;
+      padding-right: 2px;
+      align-self: flex-start;
+      margin-top: 2px;
+    }
+    .bev-row.rank-1 .rank-badge { opacity: 0.7; }
+
+    /* ── Footer ── */
+    .footer-note {
+      text-align: center;
+      margin-top: 20px;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 0.72rem;
+      color: var(--gold);
+      opacity: 0.45;
     }
   </style>
 </head>
 <body>
-
-  <!-- Beer mug SVG template — cloned into the grid via JS, never user-supplied -->
-  <template id="mug-tpl">
-    <svg width="21" height="25" viewBox="0 0 22 26" fill="none"
-         xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <rect x="1" y="5" width="15" height="19" rx="2" fill="#B85000" opacity="0.88"/>
-      <path d="M16 9 C21 9 21 19 16 19"
-            stroke="#B85000" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.88"/>
-      <rect x="1" y="5" width="15" height="5" rx="2" fill="#F8F4EC" opacity="0.75"/>
-      <rect x="3" y="5" width="9"  height="3" rx="1" fill="white"   opacity="0.65"/>
-    </svg>
-  </template>
 
   <div id="bubbles"></div>
 
@@ -327,8 +320,8 @@
 
     <header class="header">
       <p class="pre-title">Systembolaget &middot; Kalkylator</p>
-      <h1>Bright<br><em>Brew</em></h1>
-      <p class="tagline">Hur många öl får du för pengarna?</p>
+      <h1>Vad får du<br>för <em>pengarna?</em></h1>
+      <p class="tagline">Ange ett belopp och se hur långt det räcker</p>
     </header>
 
     <div class="divider" aria-hidden="true">
@@ -337,7 +330,7 @@
       <div class="divider-line"></div>
     </div>
 
-    <label class="field-label" for="amount">Ange belopp</label>
+    <label class="field-label" for="amount">Belopp i kronor</label>
     <div class="input-shell">
       <span class="kr-badge" aria-hidden="true">kr</span>
       <input
@@ -352,72 +345,89 @@
     </div>
 
     <div class="results" id="results" aria-live="polite" aria-atomic="true">
-      <div class="result-hero">
-        <div class="big-number" id="bigNumber">0</div>
-        <div class="unit-label">Bright Brew</div>
+      <div class="results-header">
+        <span class="results-header-label">Dryck</span>
+        <span class="results-header-label">Antal &nbsp;/&nbsp; Växel</span>
       </div>
-
-      <div class="mugs" id="mugsGrid"></div>
-
-      <div class="info-row">
-        <div class="info-box">
-          <span class="info-box-label">Kostnad</span>
-          <span class="info-box-value" id="spent">0,00&nbsp;kr</span>
-        </div>
-        <div class="info-box">
-          <span class="info-box-label">Växel</span>
-          <span class="info-box-value" id="change">0,00&nbsp;kr</span>
-        </div>
-      </div>
+      <div class="bev-list" id="bevList"></div>
     </div>
 
-    <p class="footer-note">15:90 kr/st &middot; exkl. pant &middot; systembolaget.se</p>
+    <p class="footer-note">Priser från systembolaget.se &middot; exkl. pant</p>
 
   </main>
 
   <script>
-    // ─── Configuration ────────────────────────────────────────────────────────
-    const PRICE_PER_BREW = 15.90;   // ← Update here when price changes
+    // ─── Beverages ────────────────────────────────────────────────────────────
+    // Update prices here when Systembolaget changes them.
+    const BEVERAGES = [
+      {
+        id:    'brightbrew',
+        name:  'Bright Brew',
+        meta:  'Öl · 50 cl',
+        emoji: '🍺',
+        price: 15.90
+      },
+      {
+        id:    'norrlands',
+        name:  'Norrlands Guld Export',
+        meta:  'Öl · 33 cl',
+        emoji: '🍺',
+        price: 12.90
+      },
+      {
+        id:    'mariestads',
+        name:  'Mariestads Export',
+        meta:  'Öl · 33 cl',
+        emoji: '🍺',
+        price: 14.50
+      },
+      {
+        id:    'rekorderlig',
+        name:  'Rekorderlig Jordgubb Lime',
+        meta:  'Cider · 33 cl',
+        emoji: '🍹',
+        price: 14.90
+      },
+      {
+        id:    'absolut',
+        name:  'Absolut Vodka',
+        meta:  'Sprit · 700 ml',
+        emoji: '🥃',
+        price: 252.00
+      }
+    ];
     // ─────────────────────────────────────────────────────────────────────────
 
     // Generate ambient bubbles
     const bubblesEl = document.getElementById('bubbles');
-    for (let i = 0; i < 32; i++) {
+    for (let i = 0; i < 28; i++) {
       const b = document.createElement('div');
       b.className = 'bubble';
-      const sz = 3 + Math.random() * 20;
-      b.style.width            = sz + 'px';
-      b.style.height           = sz + 'px';
-      b.style.left             = (1 + Math.random() * 98) + '%';
-      b.style.bottom           = '-' + (sz + 2) + 'px';
+      const sz = 3 + Math.random() * 18;
+      b.style.width             = sz + 'px';
+      b.style.height            = sz + 'px';
+      b.style.left              = (1 + Math.random() * 98) + '%';
+      b.style.bottom            = '-' + (sz + 2) + 'px';
       b.style.animationDuration = (7 + Math.random() * 13) + 's';
-      b.style.animationDelay   = '-' + (Math.random() * 18) + 's';
+      b.style.animationDelay    = '-' + (Math.random() * 18) + 's';
       bubblesEl.appendChild(b);
     }
 
-    // DOM refs
+    // DOM
     const amountInput = document.getElementById('amount');
     const resultsEl   = document.getElementById('results');
-    const bigNumber   = document.getElementById('bigNumber');
-    const spentEl     = document.getElementById('spent');
-    const changeEl    = document.getElementById('change');
-    const mugsGrid    = document.getElementById('mugsGrid');
-    const mugTpl      = document.getElementById('mug-tpl');
+    const bevList     = document.getElementById('bevList');
 
-    // Animated count-up
-    let rafId   = null;
-    let lastVal = 0;
-
-    function animCount(from, to) {
-      if (rafId) cancelAnimationFrame(rafId);
+    // Animated count for a single element
+    function animCount(el, from, to) {
       const t0  = performance.now();
-      const dur = Math.min(550, Math.abs(to - from) * 12 + 80);
+      const dur = Math.min(500, Math.abs(to - from) * 10 + 80);
       (function frame(now) {
         const p    = Math.min((now - t0) / dur, 1);
         const ease = 1 - Math.pow(1 - p, 3);
-        bigNumber.textContent = Math.round(from + (to - from) * ease);
-        if (p < 1) rafId = requestAnimationFrame(frame);
-        else bigNumber.textContent = to;
+        el.textContent = Math.round(from + (to - from) * ease);
+        if (p < 1) requestAnimationFrame(frame);
+        else el.textContent = to;
       })(performance.now());
     }
 
@@ -428,43 +438,86 @@
       }) + '\u00a0kr';
     }
 
+    // Track previous counts per beverage for animation
+    const prevCounts = {};
+
     function calculate() {
       const raw    = parseFloat(amountInput.value);
       const amount = (isNaN(raw) || raw < 0) ? 0 : raw;
 
       if (amount === 0) {
         resultsEl.classList.remove('open');
-        lastVal = 0;
         return;
       }
 
-      const count    = Math.floor(amount / PRICE_PER_BREW);
-      const cost     = Math.round(count * PRICE_PER_BREW * 100) / 100;
-      const leftover = Math.round((amount - cost) * 100) / 100;
+      // Compute results and sort by count descending
+      const computed = BEVERAGES.map(bev => {
+        const count    = Math.floor(amount / bev.price);
+        const cost     = Math.round(count * bev.price * 100) / 100;
+        const leftover = Math.round((amount - cost) * 100) / 100;
+        return { bev, count, leftover };
+      }).sort((a, b) => b.count - a.count);
 
       resultsEl.classList.add('open');
-      animCount(lastVal, count);
-      lastVal = count;
 
-      spentEl.textContent  = sek(cost);
-      changeEl.textContent = sek(leftover);
+      // Rebuild rows (preserving animation)
+      bevList.replaceChildren();
 
-      // Render mug icons using template clones (no innerHTML)
-      mugsGrid.replaceChildren();
-      const show = Math.min(count, 60);
-      for (let i = 0; i < show; i++) {
-        const wrap = document.createElement('div');
-        wrap.className = 'mug';
-        wrap.style.animationDelay = (i * 15) + 'ms';
-        wrap.appendChild(mugTpl.content.cloneNode(true));
-        mugsGrid.appendChild(wrap);
-      }
-      if (count > 60) {
-        const more = document.createElement('div');
-        more.className = 'more-label';
-        more.textContent = '+' + (count - 60).toLocaleString('sv-SE') + ' till';
-        mugsGrid.appendChild(more);
-      }
+      computed.forEach((item, idx) => {
+        const row = document.createElement('div');
+        row.className = 'bev-row' + (idx === 0 ? ' rank-1' : '');
+        row.style.animationDelay = (idx * 40) + 'ms';
+
+        // Emoji
+        const emojiEl = document.createElement('div');
+        emojiEl.className = 'bev-emoji';
+        emojiEl.textContent = item.bev.emoji;
+        row.appendChild(emojiEl);
+
+        // Info
+        const infoEl = document.createElement('div');
+        infoEl.className = 'bev-info';
+
+        const nameEl = document.createElement('div');
+        nameEl.className = 'bev-name';
+        nameEl.textContent = item.bev.name;
+        infoEl.appendChild(nameEl);
+
+        const metaEl = document.createElement('div');
+        metaEl.className = 'bev-meta';
+        metaEl.textContent = item.bev.meta + ' · ' + item.bev.price.toLocaleString('sv-SE', { minimumFractionDigits: 2 }) + ' kr/st';
+        infoEl.appendChild(metaEl);
+
+        row.appendChild(infoEl);
+
+        // Rank badge (only visible for rank-1 via CSS)
+        const badgeEl = document.createElement('div');
+        badgeEl.className = 'rank-badge';
+        badgeEl.textContent = 'Mest';
+        row.appendChild(badgeEl);
+
+        // Count + change
+        const rightEl = document.createElement('div');
+        rightEl.className = 'bev-right';
+
+        const countEl = document.createElement('div');
+        countEl.className = 'bev-count';
+        countEl.textContent = prevCounts[item.bev.id] || 0;
+        rightEl.appendChild(countEl);
+
+        const changeEl = document.createElement('div');
+        changeEl.className = 'bev-change';
+        changeEl.textContent = '+' + sek(item.leftover);
+        rightEl.appendChild(changeEl);
+
+        row.appendChild(rightEl);
+        bevList.appendChild(row);
+
+        // Animate the count
+        const prev = prevCounts[item.bev.id] || 0;
+        animCount(countEl, prev, item.count);
+        prevCounts[item.bev.id] = item.count;
+      });
     }
 
     amountInput.addEventListener('input', calculate);
